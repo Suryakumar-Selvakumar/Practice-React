@@ -3,31 +3,34 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-function List(props) {
+function Person() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  function handleFirstNameInput(e) {
+    setFirstName(e.target.value);
+  }
+
+  function handleLastNameInput(e) {
+    setLastName(e.target.value);
+  }
+
   return (
     <>
-      {!props.animals && <div>Loading...</div>}
-      {props.animals && props.animals.length > 0 && (
-        <ul>
-          {props.animals.map((animal) => (
-            <li key={animal}>{animal}</li>
-          ))}
-        </ul>
-      )}
-      {props.animals && props.animals.length === 0 && (
-        <div>There are no animals in the list!</div>
-      )}
+      <label htmlFor="first-name">First Name: </label>
+      <input type="text" id="first-name" onChange={handleFirstNameInput}/>
+      <label htmlFor="last-name">Last Name: </label>
+      <input type="text" id="last-name" onChange={handleLastNameInput}/>
+      <h1>{firstName + ' ' + lastName}</h1>
     </>
   );
 }
 
 function App() {
-  const animals = [];
 
   return (
     <div>
-      <h1>Animals: </h1>
-      <List animals={animals}/>
+      <Person />
     </div>
   );
 }
