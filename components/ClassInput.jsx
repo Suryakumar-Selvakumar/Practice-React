@@ -1,5 +1,5 @@
 import { Component } from "react";
-
+import Count from "./Count";
 class ClassInput extends Component {
   constructor(props) {
     super(props);
@@ -61,6 +61,7 @@ class ClassInput extends Component {
             </li>
           ))}
         </ul>
+        <Count todos={this.state.todos} />
       </section>
     );
   }
