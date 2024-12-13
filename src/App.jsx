@@ -1,11 +1,14 @@
-import { useState } from "react";
 import "./App.css";
+import { FunctionalInput } from "../components/FunctionalInput";
+import ClassInput from "../components/ClassInput";
 
 function App() {
   return (
-    <div>
-      <Person />
-    </div>
+    <>
+      <FunctionalInput name="Functional component" />
+      <div className="divider" />
+      <ClassInput name="Class based component" />
+    </>
   );
 }
 

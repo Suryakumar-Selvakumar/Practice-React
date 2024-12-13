@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export const FunctionalInput = ({ name }) => {
   const [todos, setTodos] = useState(["Just some demo tasks", "As an example"]);
   const [inputVal, setInputVal] = useState("");
