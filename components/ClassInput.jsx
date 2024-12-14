@@ -7,11 +7,15 @@ class ClassInput extends Component {
     this.state = {
       todos: ["Just some demo tasks", "As an example"],
       inputVal: "",
+      editableTodo: [],
+      editVal: "",
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleReSubmit = this.handleReSubmit.bind(this);
   }
 
   handleInputChange(e) {
@@ -36,6 +40,29 @@ class ClassInput extends Component {
     }));
   }
 
+  handleEdit(todo) {
+    this.setState((state) => ({
+      ...state,
+      editableTodo: [todo],
+      editVal: todo,
+    }));
+  }
+
+  handleReSubmit(todo) {
+    this.setState((state) => ({
+      ...state,
+      todos: state.todos.map((todoItem) => {
+        if (todoItem == todo) {
+          return state.editVal;
+        } else {
+          return todoItem;
+        }
+      }),
+      editVal: "",
+      editableTodo: [],
+    }));
+  }
+
   render() {
     return (
       <section>
@@ -54,10 +81,34 @@ class ClassInput extends Component {
         <ul>
           {this.state.todos.map((todo) => (
             <li key={todo}>
-              {todo}{" "}
-              <button onClick={() => this.handleDelete(todo)}>
-                Delete todo
-              </button>
+              {!this.state.editableTodo.includes(todo) ? (
+                <>
+                  {todo}{" "}
+                  <button onClick={() => this.handleDelete(todo)}>
+                    Delete todo
+                  </button>{" "}
+                  <button onClick={() => this.handleEdit(todo)}>
+                    Edit todo
+                  </button>
+                </>
+              ) : (
+                <>
+                  <input
+                    type="text"
+                    name="task-edit"
+                    value={this.state.editVal}
+                    onChange={(e) => {
+                      this.setState((state) => ({
+                        ...state,
+                        editVal: e.target.value,
+                      }));
+                    }}
+                  />
+                  <button onClick={() => this.handleReSubmit(todo)}>
+                    Resubmit
+                  </button>
+                </>
+              )}
             </li>
           ))}
         </ul>
