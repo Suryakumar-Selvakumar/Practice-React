@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { object, func, arrayOf, bool } from "prop-types";
 import FlipMove from "react-flip-move";
 import Submission from "./submission";
-import ProjectSubmissionContext from "../ProjectSubmissionContext";
+import ProjectSubmissionContext from "./ProjectSubmissionContext";
 
 const noop = () => {};
 
