@@ -3,18 +3,21 @@ import { render, screen } from "@testing-library/react";
 
 import ProjectSubmissionContext from "../src/components/ProjectSubmissionContext.js";
 import SubmissionsList from "../src/components/submissions-list";
-import jest from "@testing-library/jest-dom";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 // eslint-disable-next-line react/display-name
-jest.mock("react-flip-move", () => ({ children }) => <div>{children}</div>);
+vi.mock("react-flip-move", () => ({
+  default: ({ children }) => <div>{children}</div>,
+}));
 
-jest.mock("../submission", ({ submission, isDashboardView }) => (
-  <>
-    <div data-test-id="submission">{submission.id}</div>
-    <div data-test-id="dashboard">{isDashboardView.toString()}</div>
-  </>
-));
+vi.mock("./submission", () => ({
+  default: ({ submission, isDashboardView }) => (
+    <>
+      <div data-test-id="submission">{submission.id}</div>
+      <div data-test-id="dashboard">{isDashboardView.toString()}</div>
+    </>
+  ),
+}));
 
 // setup props
 const submissions = [
@@ -23,10 +26,10 @@ const submissions = [
   { id: "baz", likes: 1 },
 ];
 const userSubmission = { id: "foobar" };
-const handleDelete = jest.fn();
-const onFlag = jest.fn();
-const handleUpdate = jest.fn();
-const handleLikeToggle = jest.fn();
+const handleDelete = vi.fn();
+const onFlag = vi.fn();
+const handleUpdate = vi.fn();
+const handleLikeToggle = vi.fn();
 
 describe("submissions list", () => {
   describe("submissions", () => {
