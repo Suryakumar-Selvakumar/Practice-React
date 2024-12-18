@@ -1,5 +1,5 @@
 import { useState } from "react";
-import UserManagement from "./child-component";
+import UserManagement from "../../src/components/child-component";
 
 const GroupForm = ({ initialUsers = [] }) => {
   const [users, setUsers] = useState(initialUsers);
