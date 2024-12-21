@@ -9,6 +9,12 @@ class PercentageStat extends Component {
     this.total = props.total;
   }
 
+  static defaultProps = {
+    label: "Class 0",
+    score: 0,
+    total: 1,
+  };
+
   render() {
     return (
       <div>
@@ -50,12 +56,6 @@ function validatedType(...validators) {
     }
   };
 }
-
-PercentageStat.defaultProps = {
-  label: "Class 0",
-  score: 0,
-  total: 1,
-};
 
 PercentageStat.propTypes = {
   label: PropTypes.string.isRequired,
