@@ -1,5 +1,4 @@
 import "./App.css";
-import PercentageStat from "./components/PercentageStat";
 
 const App = () => {
   return (
