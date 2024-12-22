@@ -11,6 +11,9 @@ const App = () => {
           <li>
             <Link to="profile">Profile page</Link>
           </li>
+          <li>
+            <Link to="tasks">Tasks page</Link>
+          </li>
         </ul>
       </nav>
     </div>
