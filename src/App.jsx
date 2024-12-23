@@ -1,9 +1,9 @@
 import "./App.css";
-import { Link } from "react-router-dom";
-import Image from "./components/DataFetcher";
+import FetchGetRequest from "./components/FetchGetRequest";
+import FetchPostRequest from "./components/FetchPostRequest";
 
 const App = () => {
-  return <Image />;
+  return <FetchGetRequest />;
 };
 
 export default App;
