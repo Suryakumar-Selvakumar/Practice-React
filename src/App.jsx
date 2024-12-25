@@ -1,9 +1,8 @@
 import "./App.css";
-import FetchGetRequest from "./components/FetchGetRequest";
-import FetchPostRequest from "./components/FetchPostRequest";
+import Button from "./components/Button";
 
 const App = () => {
-  return <FetchGetRequest />;
+  return <Button type="secondary" />;
 };
 
 export default App;
