@@ -1,8 +1,8 @@
 import "./App.css";
-import Button from "./components/Button";
+import { Rotate } from "./components/Rotate";
 
 const App = () => {
-  return <Button type="secondary" />;
+  return <Rotate>&lt; 💅🏾 &gt;</Rotate>;
 };
 
 export default App;
