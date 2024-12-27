@@ -1,18 +1,30 @@
 import styled from "styled-components";
+import { Component, createRef } from "react";
 
-const Input = styled.input.attrs((props) => ({
-  type: "text",
-  $size: props.$size || "1em",
-}))`
-  border: 2px solid #bf4f74;
-  margin: ${(props) => props.$size};
-  padding: ${(props) => props.$size};
+const Input = styled.input`
+  padding: 0.5em;
+  margin: 0.5em;
+  color: #bf4f74;
+  background: papayawhip;
+  border: none;
+  border-radius: 3px;
 `;
 
-const PasswordInput = styled(Input).attrs({
-  type: "password",
-})`
-  border: 2px solid aqua;
-`;
+class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = createRef(null);
+  }
 
-export { Input, PasswordInput };
+  render() {
+    return (
+      <Input
+        ref={this.inputRef}
+        placeholder="Hover to focus!"
+        onMouseEnter={() => this.inputRef.current.focus()}
+      />
+    );
+  }
+}
+
+export { Form };

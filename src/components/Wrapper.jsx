@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: #bf4f74;
-`;
+export function Backdrop({ opacity, color, children }) {
+  return (
+    <Wrapper style={{ "--color": color, "--opacity": opacity }}>
+      {children}
+    </Wrapper>
+  );
+}
 
-const Wrapper = styled.section`
-  padding: 4em;
-  background: papayawhip;
+const Wrapper = styled.div`
+  opacity: var(--opacity, 0.75);
+  background-color: var(--color, var(--color-gray-900));
 `;
-
-export { Title, Wrapper };

@@ -1,23 +1,19 @@
 import styled from "styled-components";
 
-const Button = styled.button`
-  background: ${(props) => (props.$primary ? "#BF4F74" : "white")};
-  color: ${(props) => (props.$primary ? "white" : "#BF4F74")};
-
+export const Button = styled.button`
   font-size: 1em;
   margin: 1em;
-  padding: 0.25rem 1em;
-  border: 2px solid #bf4f74;
+  padding: 0.25em 1em;
   border-radius: 3px;
+
+  color: ${(props) => props.theme.fg};
+  border: 2px solid ${(props) => props.theme.fg};
+  background: ${(props) => props.theme.bg};
 `;
 
-const TomatoButton = styled(Button)`
-  color: tomato;
-  border-color: tomato;
-`;
-
-const ReversedButton = (props) => (
-  <Button {...props} children={props.children.split("").reverse()} />
-);
-
-export { Button, TomatoButton, ReversedButton };
+Button.defaultProps = {
+  theme: {
+    fg: "#BF4F74",
+    bg: "white",
+  },
+};
