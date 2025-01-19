@@ -2,7 +2,6 @@ import App from "./App";
 import Profile from "./Profile";
 import ErrorPage from "./ErrorPage";
 import Tasks from "./Tasks";
-import { element } from "prop-types";
 import Post from "./components/Post";
 import FetchGetRequest from "./components/FetchGetRequest";
 
