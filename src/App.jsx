@@ -1,27 +1,44 @@
+import { useReducer } from "react";
+import { useImmerReducer } from "use-immer";
 import "./App.css";
-import { useState } from "react";
-import SplitPane from "./components/SplitPane";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "incremented_count": {
+      state.count += 1;
+      break;
+    }
+    case "decremented_count": {
+      state.count -= 1;
+      break;
+    }
+    case "set_count": {
+      state.count = action.value;
+      break;
+    }
+    default: {
+      throw new Error("unknown action: " + action.type);
+    }
+  }
+}
 
 const App = () => {
+  const [state, dispatch] = useImmerReducer(reducer, { count: 0 });
+
   return (
-    <SplitPane
-      left={
-        <div>
-          <ul>
-            <li>
-              <a href="#">Link 1</a>
-            </li>
-            <li>
-              <a href="#">Link 2</a>
-            </li>
-          </ul>
-        </div>
-      }
-      right={<Copyright label="Robin" />}
-    />
+    <div>
+      <button onClick={() => dispatch({ type: "incremented_count" })}>
+        Increase count
+      </button>
+      <button onClick={() => dispatch({ type: "decremented_count" })}>
+        Decrease count
+      </button>
+      <button onClick={() => dispatch({ type: "set_count", value: 5 })}>
+        Set count to 5
+      </button>
+      <p>{state.count}</p>
+    </div>
   );
 };
-
-const Copyright = ({ label }) => <div>Copyright by: {label}</div>;
 
 export default App;
