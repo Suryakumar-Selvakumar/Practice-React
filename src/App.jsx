@@ -1,44 +1,50 @@
-import { useReducer } from "react";
-import { useImmerReducer } from "use-immer";
-import "./App.css";
+import { useRef, useState, useEffect } from "react";
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "incremented_count": {
-      state.count += 1;
-      break;
+export function Counter() {
+  const [count, setCount] = useState(0);
+  const [delay, setDelay] = useState(1000);
+
+  useInterval(() => setCount(count + 1), delay);
+
+  useInterval(() => {
+    if (delay > 10) {
+      setDelay(delay / 2);
     }
-    case "decremented_count": {
-      state.count -= 1;
-      break;
-    }
-    case "set_count": {
-      state.count = action.value;
-      break;
-    }
-    default: {
-      throw new Error("unknown action: " + action.type);
-    }
+  }, 1000);
+
+  function handleReset() {
+    setDelay(1000);
   }
+
+  return (
+    <>
+      <h1>{count}</h1>
+      <h4>Delay: {delay}</h4>
+      <button onClick={handleReset}>Reset Delay</button>
+    </>
+  );
 }
 
 const App = () => {
-  const [state, dispatch] = useImmerReducer(reducer, { count: 0 });
-
-  return (
-    <div>
-      <button onClick={() => dispatch({ type: "incremented_count" })}>
-        Increase count
-      </button>
-      <button onClick={() => dispatch({ type: "decremented_count" })}>
-        Decrease count
-      </button>
-      <button onClick={() => dispatch({ type: "set_count", value: 5 })}>
-        Set count to 5
-      </button>
-      <p>{state.count}</p>
-    </div>
-  );
+  return <Counter />;
 };
+
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
 
 export default App;
